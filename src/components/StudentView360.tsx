@@ -34,13 +34,22 @@ import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-const beltMap: Record<string, { color: string; label: string; next: string; lessonsNeeded: number; lessonsDone: number }> = {
-  branca: { color: "bg-white text-black", label: "Branca", next: "Azul", lessonsNeeded: 120, lessonsDone: 85 },
-  azul: { color: "bg-blue-600 text-white", label: "Azul", next: "Roxa", lessonsNeeded: 200, lessonsDone: 142 },
-  roxa: { color: "bg-purple-600 text-white", label: "Roxa", next: "Marrom", lessonsNeeded: 250, lessonsDone: 198 },
-  marrom: { color: "bg-amber-800 text-white", label: "Marrom", next: "Preta", lessonsNeeded: 300, lessonsDone: 267 },
-  preta: { color: "bg-black text-white border border-muted", label: "Preta", next: "—", lessonsNeeded: 0, lessonsDone: 0 },
+// Graduation rules based on Black Ace system
+const graduationRules: Record<string, {
+  label: string; next: string; lessonsNeeded: number; lessonsPerGrau: number;
+  minMonths: string; totalGraus: number;
+  color: string;
+}> = {
+  branca: { label: "Branca", next: "Azul", lessonsNeeded: 120, lessonsPerGrau: 30, minMonths: "12–18 meses", totalGraus: 4, color: "bg-white text-black" },
+  azul: { label: "Azul", next: "Roxa", lessonsNeeded: 200, lessonsPerGrau: 50, minMonths: "18–24 meses", totalGraus: 4, color: "bg-blue-600 text-white" },
+  roxa: { label: "Roxa", next: "Marrom", lessonsNeeded: 220, lessonsPerGrau: 55, minMonths: "18 meses", totalGraus: 4, color: "bg-purple-600 text-white" },
+  marrom: { label: "Marrom", next: "Preta", lessonsNeeded: 180, lessonsPerGrau: 45, minMonths: "12 meses", totalGraus: 4, color: "bg-amber-800 text-white" },
+  preta: { label: "Preta", next: "—", lessonsNeeded: 0, lessonsPerGrau: 0, minMonths: "—", totalGraus: 0, color: "bg-black text-white border border-muted" },
 };
+
+const beltMap = Object.fromEntries(
+  Object.entries(graduationRules).map(([k, v]) => [k, { color: v.color, label: v.label, next: v.next, lessonsNeeded: v.lessonsNeeded, lessonsDone: 0 }])
+) as Record<string, { color: string; label: string; next: string; lessonsNeeded: number; lessonsDone: number }>;
 
 const mockStudents = [
   {
@@ -358,23 +367,79 @@ const StudentView360 = () => {
                         </div>
                       </div>
 
-                      {/* Belt Progress */}
-                      {selectedStudent.belt !== "preta" && (
-                        <div className="mt-4 p-3 rounded-lg bg-secondary/30">
-                          <div className="flex items-center justify-between text-xs mb-1.5">
-                            <span className="text-muted-foreground">
-                              Progresso para Faixa {beltMap[selectedStudent.belt].next}
-                            </span>
-                            <span className="font-semibold text-primary">
-                              {beltMap[selectedStudent.belt].lessonsDone}/{beltMap[selectedStudent.belt].lessonsNeeded} aulas
-                            </span>
+                      {/* Belt & Grau Progress */}
+                      {selectedStudent.belt !== "preta" && (() => {
+                        const rules = graduationRules[selectedStudent.belt];
+                        const totalLessons = selectedStudent.stats.totalClasses;
+                        const currentGrau = Math.min(Math.floor(totalLessons / rules.lessonsPerGrau), rules.totalGraus);
+                        const lessonsInCurrentGrau = totalLessons - (currentGrau * rules.lessonsPerGrau);
+                        const isMaxGrau = currentGrau >= rules.totalGraus;
+
+                        return (
+                          <div className="mt-4 p-4 rounded-lg bg-secondary/30 space-y-3">
+                            {/* Overall belt progress */}
+                            <div>
+                              <div className="flex items-center justify-between text-xs mb-1.5">
+                                <span className="text-muted-foreground">
+                                  Progresso para Faixa {rules.next}
+                                </span>
+                                <span className="font-semibold text-primary">
+                                  {Math.min(totalLessons, rules.lessonsNeeded)}/{rules.lessonsNeeded} aulas
+                                </span>
+                              </div>
+                              <Progress
+                                value={Math.min((totalLessons / rules.lessonsNeeded) * 100, 100)}
+                                className="h-2"
+                              />
+                            </div>
+
+                            {/* Grau detail */}
+                            <div className="grid grid-cols-2 gap-3 pt-1">
+                              <div className="flex items-center gap-2">
+                                <div className="w-6 h-6 rounded-full gradient-gold flex items-center justify-center text-[10px] font-bold text-primary-foreground">
+                                  {currentGrau}
+                                </div>
+                                <div>
+                                  <p className="text-xs font-semibold text-foreground">{currentGrau}º Grau</p>
+                                  <p className="text-[10px] text-muted-foreground">de {rules.totalGraus} graus</p>
+                                </div>
+                              </div>
+                              <div>
+                                <p className="text-[10px] text-muted-foreground">Tempo mínimo</p>
+                                <p className="text-xs font-semibold text-foreground">{rules.minMonths}</p>
+                              </div>
+                            </div>
+
+                            {/* Grau progress bars */}
+                            <div className="space-y-1.5">
+                              {Array.from({ length: rules.totalGraus }).map((_, i) => {
+                                const grauNum = i + 1;
+                                const grauStart = i * rules.lessonsPerGrau;
+                                const grauLessons = Math.max(0, Math.min(totalLessons - grauStart, rules.lessonsPerGrau));
+                                const pct = (grauLessons / rules.lessonsPerGrau) * 100;
+                                const isComplete = grauLessons >= rules.lessonsPerGrau;
+
+                                return (
+                                  <div key={i} className="flex items-center gap-2">
+                                    <span className={`text-[10px] w-12 font-medium ${isComplete ? "text-success" : "text-muted-foreground"}`}>
+                                      {grauNum}º grau
+                                    </span>
+                                    <div className="flex-1 h-1.5 rounded-full bg-muted overflow-hidden">
+                                      <div
+                                        className={`h-full rounded-full transition-all duration-700 ${isComplete ? "bg-success" : "gradient-gold"}`}
+                                        style={{ width: `${pct}%` }}
+                                      />
+                                    </div>
+                                    <span className="text-[10px] text-muted-foreground w-12 text-right">
+                                      {grauLessons}/{rules.lessonsPerGrau}
+                                    </span>
+                                  </div>
+                                );
+                              })}
+                            </div>
                           </div>
-                          <Progress
-                            value={(beltMap[selectedStudent.belt].lessonsDone / beltMap[selectedStudent.belt].lessonsNeeded) * 100}
-                            className="h-2"
-                          />
-                        </div>
-                      )}
+                        );
+                      })()}
                     </div>
 
                     {/* Stats Grid */}
