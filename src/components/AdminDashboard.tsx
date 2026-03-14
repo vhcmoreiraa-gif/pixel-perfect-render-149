@@ -214,9 +214,9 @@ const BeltDistributionCard = () => (
 
 // --- Upcoming Graduations ---
 const upcomingGrads = [
-  { name: "João Silva", from: "Branca", to: "Azul", lessons: "28/30", pct: 93 },
-  { name: "Maria Santos", from: "Azul", to: "Roxa", lessons: "45/50", pct: 90 },
-  { name: "Pedro Alves", from: "Branca", to: "Azul", lessons: "25/30", pct: 83 },
+  { name: "João Silva", from: "Branca", to: "Azul", lessons: "112/120", pct: 93 },
+  { name: "Maria Santos", from: "Azul", to: "Roxa", lessons: "180/200", pct: 90 },
+  { name: "Pedro Alves", from: "Marrom", to: "Preta", lessons: "160/180", pct: 89 },
 ];
 
 const GraduationsCard = () => (
