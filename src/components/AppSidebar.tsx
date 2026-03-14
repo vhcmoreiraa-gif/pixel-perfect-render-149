@@ -21,6 +21,7 @@ const navItems = [
   { icon: TrendingUp, label: "Ranking", path: "/ranking" },
   { icon: Trophy, label: "Campeonatos", path: "/campeonatos" },
   { icon: Users, label: "Comunidade", path: "/comunidade" },
+  { icon: LayoutDashboard, label: "Admin", path: "/admin" },
   { icon: Settings, label: "Configurações", path: "/configuracoes" },
 ];
 
