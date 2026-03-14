@@ -8,6 +8,7 @@ import RankingPage from "./pages/RankingPage.tsx";
 import CheckInsPage from "./pages/CheckInsPage.tsx";
 import AdminPage from "./pages/AdminPage.tsx";
 import CommunityPage from "./pages/CommunityPage.tsx";
+import StudentView360Page from "./pages/StudentView360Page.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/check-ins" element={<CheckInsPage />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/comunidade" element={<CommunityPage />} />
+          <Route path="/visao-360" element={<StudentView360Page />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
