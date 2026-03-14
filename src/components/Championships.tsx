@@ -133,11 +133,6 @@ const mockChampionships: Championship[] = [
   },
 ];
 
-const availableStudents = [
-  { id: "a1", name: "Aluno Faixa Azul", belt: "Azul" },
-  { id: "a2", name: "Maria Souza", belt: "Branca" },
-  { id: "a3", name: "João Pereira", belt: "Roxa" },
-];
 
 const Championships = () => {
   const [isAdmin, setIsAdmin] = useState(true);
