@@ -34,13 +34,22 @@ import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-const beltMap: Record<string, { color: string; label: string; next: string; lessonsNeeded: number; lessonsDone: number }> = {
-  branca: { color: "bg-white text-black", label: "Branca", next: "Azul", lessonsNeeded: 120, lessonsDone: 85 },
-  azul: { color: "bg-blue-600 text-white", label: "Azul", next: "Roxa", lessonsNeeded: 200, lessonsDone: 142 },
-  roxa: { color: "bg-purple-600 text-white", label: "Roxa", next: "Marrom", lessonsNeeded: 250, lessonsDone: 198 },
-  marrom: { color: "bg-amber-800 text-white", label: "Marrom", next: "Preta", lessonsNeeded: 300, lessonsDone: 267 },
-  preta: { color: "bg-black text-white border border-muted", label: "Preta", next: "—", lessonsNeeded: 0, lessonsDone: 0 },
+// Graduation rules based on Black Ace system
+const graduationRules: Record<string, {
+  label: string; next: string; lessonsNeeded: number; lessonsPerGrau: number;
+  minMonths: string; totalGraus: number;
+  color: string;
+}> = {
+  branca: { label: "Branca", next: "Azul", lessonsNeeded: 120, lessonsPerGrau: 30, minMonths: "12–18 meses", totalGraus: 4, color: "bg-white text-black" },
+  azul: { label: "Azul", next: "Roxa", lessonsNeeded: 200, lessonsPerGrau: 50, minMonths: "18–24 meses", totalGraus: 4, color: "bg-blue-600 text-white" },
+  roxa: { label: "Roxa", next: "Marrom", lessonsNeeded: 220, lessonsPerGrau: 55, minMonths: "18 meses", totalGraus: 4, color: "bg-purple-600 text-white" },
+  marrom: { label: "Marrom", next: "Preta", lessonsNeeded: 180, lessonsPerGrau: 45, minMonths: "12 meses", totalGraus: 4, color: "bg-amber-800 text-white" },
+  preta: { label: "Preta", next: "—", lessonsNeeded: 0, lessonsPerGrau: 0, minMonths: "—", totalGraus: 0, color: "bg-black text-white border border-muted" },
 };
+
+const beltMap = Object.fromEntries(
+  Object.entries(graduationRules).map(([k, v]) => [k, { color: v.color, label: v.label, next: v.next, lessonsNeeded: v.lessonsNeeded, lessonsDone: 0 }])
+) as Record<string, { color: string; label: string; next: string; lessonsNeeded: number; lessonsDone: number }>;
 
 const mockStudents = [
   {
