@@ -7,6 +7,7 @@ import Index from "./pages/Index.tsx";
 import RankingPage from "./pages/RankingPage.tsx";
 import CheckInsPage from "./pages/CheckInsPage.tsx";
 import AdminPage from "./pages/AdminPage.tsx";
+import CommunityPage from "./pages/CommunityPage.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
