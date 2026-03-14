@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Flame, Trophy, Zap, Star, Target, Calendar, ChevronRight, CheckCircle2, Circle, Medal, Clock, TrendingUp } from "lucide-react";
+import { Flame, Trophy, Zap, Star, Calendar, ChevronRight, CheckCircle2, Circle, Medal, Clock } from "lucide-react";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
