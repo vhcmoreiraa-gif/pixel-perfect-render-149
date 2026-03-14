@@ -10,6 +10,7 @@ import AdminPage from "./pages/AdminPage.tsx";
 import CommunityPage from "./pages/CommunityPage.tsx";
 import StudentView360Page from "./pages/StudentView360Page.tsx";
 import ChampionshipsPage from "./pages/ChampionshipsPage.tsx";
+import GradePage from "./pages/GradePage.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
