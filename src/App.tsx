@@ -7,6 +7,7 @@ import Index from "./pages/Index.tsx";
 import RankingPage from "./pages/RankingPage.tsx";
 import CheckInsPage from "./pages/CheckInsPage.tsx";
 import AdminPage from "./pages/AdminPage.tsx";
+import CommunityPage from "./pages/CommunityPage.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/ranking" element={<RankingPage />} />
           <Route path="/check-ins" element={<CheckInsPage />} />
           <Route path="/admin" element={<AdminPage />} />
+          <Route path="/comunidade" element={<CommunityPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
