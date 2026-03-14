@@ -10,13 +10,10 @@ import {
   ChevronDown,
   ChevronUp,
   Check,
-  X,
-  Medal,
   Swords,
   Shield,
   Eye,
   UserPlus,
-  Edit,
   Trash2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
