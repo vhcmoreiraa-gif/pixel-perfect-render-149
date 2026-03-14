@@ -12,6 +12,7 @@ import {
   LogOut,
   Sun,
   Spade,
+  ScanEye,
 } from "lucide-react";
 
 const navItems = [
