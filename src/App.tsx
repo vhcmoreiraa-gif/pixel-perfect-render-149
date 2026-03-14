@@ -8,6 +8,7 @@ import RankingPage from "./pages/RankingPage.tsx";
 import CheckInsPage from "./pages/CheckInsPage.tsx";
 import AdminPage from "./pages/AdminPage.tsx";
 import CommunityPage from "./pages/CommunityPage.tsx";
+import StudentView360Page from "./pages/StudentView360Page.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
