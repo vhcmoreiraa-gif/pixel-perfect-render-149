@@ -32,6 +32,7 @@ const App = () => (
           <Route path="/visao-360" element={<StudentView360Page />} />
           <Route path="/campeonatos" element={<ChampionshipsPage />} />
           <Route path="/grade" element={<GradePage />} />
+          <Route path="/desafios" element={<ChallengesPage />} />
           <Route path="/cadastro" element={<StudentRegistrationPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

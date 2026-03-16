@@ -423,10 +423,10 @@ const Challenges = () => {
                 </TabsList>
               </div>
               <TabsContent value="weekly">
-                <ChallengesList challenges={weeklyChallenges} type="weekly" />
+                <ChallengesList challenges={weeklyChallenges} />
               </TabsContent>
               <TabsContent value="monthly">
-                <ChallengesList challenges={monthlyChallenges} type="monthly" />
+                <ChallengesList challenges={monthlyChallenges} />
               </TabsContent>
             </Tabs>
           </motion.div>

@@ -13,6 +13,7 @@ import {
   Sun,
   Spade,
   ScanEye,
+  Gamepad2,
 } from "lucide-react";
 
 const navItems = [
