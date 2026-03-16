@@ -209,7 +209,7 @@ const StreakCard = () => (
   </motion.div>
 );
 
-const ChallengesList = ({ challenges, type }: { challenges: typeof weeklyChallenges | typeof monthlyChallenges; type: "weekly" | "monthly" }) => (
+const ChallengesList = ({ challenges }: { challenges: typeof weeklyChallenges | typeof monthlyChallenges }) => (
   <div className="space-y-3">
     {challenges.map((c, i) => {
       const isProgressType = "progress" in c;
