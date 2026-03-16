@@ -1,8 +1,7 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Zap, Star, Flame, Trophy, Target, CheckCircle2, Circle, Lock,
-  TrendingUp, Award, Swords, Calendar, ChevronRight, Medal, Clock,
+  TrendingUp, Award, Swords, Calendar, Medal,
 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
