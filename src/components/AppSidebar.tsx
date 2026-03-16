@@ -23,6 +23,7 @@ const navItems = [
   { icon: TrendingUp, label: "Ranking", path: "/ranking" },
   { icon: Trophy, label: "Campeonatos", path: "/campeonatos" },
   { icon: Users, label: "Comunidade", path: "/comunidade" },
+  { icon: Gamepad2, label: "Desafios", path: "/desafios" },
   { icon: LayoutDashboard, label: "Admin", path: "/admin" },
   { icon: ScanEye, label: "Visão 360", path: "/visao-360" },
   { icon: Users, label: "Cadastro", path: "/cadastro" },
